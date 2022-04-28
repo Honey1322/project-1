@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <div class="cssanimation leShake {sequence|random}">
+      <title >Дизайн ногтей</title>
+    <a href="12.html" target="_blank">
+        <image src='doc.png' width="100" height="100"></image>
+    </a>
+</div>
+    
+<section>
+ <h1 class="neonText">Дизайн ногтей, какой только пожелаете</h1>
+   <p class="neonText">Всё зависит от вашей фантазии!</p>
+   <p class="neonText">___________________________________________________</p>
+   <p class="neonText">Данный сайт был создан в практических целях, чтобы пользователь мог воплотить в жизнь свою идею дизайна маникюра,
+      ведь, это раскрывает индивидуальность человека, то как он себя транслирует в общество. Сколько людей, столько и мнений, каждому своё и это нужно уважать. 
+      Будьте открытыми и всё будет отлично, вы прекрасны в любом случае.</p>
+   <p class="neonText">________________________________________________</p>
+</section>
+</div>
+        <details>
+            <summary class="neonText">Ваши пожелания</summary>
+            <h3>Форма</h3>
+            <select size="1" name="DEM" onchange="with (this) if (selectedIndex) document.getElementById ('ris').src = options [selectedIndex].value">
+                <optgroup label="Форма">
+                    <option>Выбор</option>
+                    <option value="almond.jpg">Миндаль</option>
+                    <option value="square.jpg">Квадрат</option>
+                    <option value="longbalerina.jpg">Балерина</option>
+                    <option value="lightsquare.jpg">Мягкий квадрат</option>
+                    <option value="oval.jpg">Овал</option>
+                    <option value="pika.jpg">Пика</option>
+                    <option value="scosh.jpg">Скошенный</option>
+                </optgroup>
+              </select><br>
+              <img src="" id="ris">
+
+                <h3>Френч</h3>
+                    <select size="1" name="DEM" onchange="with (this) if (selectedIndex) document.getElementById ('ris').src = options [selectedIndex].value">
+                      <option>Выбор</option>
+                      <optgroup label="Френч">
+                      <option value="frenchpika.jpg">Френч пика</option>
+                      <option value="frenchoval.jpg">Френч овал</option>
+                      <option value="frenchalmond.jpg">Френч миндаль</option>
+                      <option value="frenchsquare.jpg">Френч квадрат</option>
+                      <option value="frenchlightsquare.jpg">Френч Мягкий квадрат</option>
+                      <option value="frenchscosh.jpg">Френч Скошенный</option>
+                      <option value="frenchlongbalerina.jpg">Френч Балерина</option>
+                    </select>
+                </optgroup>
+            </select> <br>
+            <img src="" id="ris">
+        </details>
+
+
+     <h2 class="neonText">Конструктор</h2>
+</head>
+
+<body>
+  
+    <details> 
+        <summary class="neonText">Палитра:</summary>
+    <div class="container">
+  <canvas id='canvas' width="600" height="600"></canvas>
+  <div id="palette"></div>
+  <div id="clear">Очистить</div>
+</div>
+</details>
+<canvas id="drawingCanvas"></canvas>
+    <script>
+        alert("Добро пожаловать на наш сайт:3");
+        
+// Выполняем по завершении загрузки страницы
+window.addEventListener("load", function onWindowLoad() {
+    // Создаём  палитру
+    generatePalette(document.getElementById("palette"));
+
+    
+ 
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    // переменные для рисования
+    context.lineCap = "round";
+    context.lineWidth = 8;
+ 
+    // вешаем обработчики на кнопки
+    // очистка изображения
+    document.getElementById("clear").onclick = function clear() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    };
+ 
+    // На любое движение мыши по canvas будет выполнятся эта функция
+    canvas.onmousemove = function drawIfPressed (e) {
+      // в "e"  попадает экземпляр MouseEvent
+      var x = e.offsetX;
+      var y = e.offsetY;
+      var dx = e.movementX;
+      var dy = e.movementY;
+ 
+      // Проверяем зажата ли какая-нибудь кнопка мыши
+      // Если да, то рисуем
+      if (e.buttons > 0) {
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(x - dx, y - dy);
+        context.stroke();
+        context.closePath();
+      }
+    };
+ 
+
+
+    function generatePalette(palette) {
+      // генерируем палитру
+      // в итоге 5^3 цветов = 125
+      for (var r = 0, max = 4; r <= max; r++) {
+        for (var g = 0; g <= max; g++) {
+          for (var b = 0; b <= max; b++)
+           {
+            var paletteBlock = document.createElement('div');
+            paletteBlock.className = 'button';
+            paletteBlock.addEventListener('click', function changeColor(e) {
+              context.strokeStyle = e.target.style.backgroundColor;
+            });
+ 
+            paletteBlock.style.backgroundColor = (
+              'rgb(' + Math.round(r * 255 / max) + ", "
+              + Math.round(g * 255 / max) + ", "
+              + Math.round(b * 255 / max) + ")"
+            );
+ 
+            palette.appendChild(paletteBlock);
+          }
+        }
+      }
+    }
+});
+
+function image(paint){
+  image.onmousemove = function drawIfPressed (e) {
+      // в "e"  попадает экземпляр MouseEvent
+      var x = e.offsetX;
+      var y = e.offsetY;
+      var dx = e.movementX;
+      var dy = e.movementY;
+ 
+      // Проверяем зажата ли какая-нибудь кнопка мыши
+      // Если да, то рисуем
+      if (e.buttons > 0) {
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(x - dx, y - dy);
+        context.stroke();
+        context.closePath();
+      }
+    };
+}
+    </script>
+    <footer>
+        <h6 class="neonText">~(O_o)~</h6>
+        </footer>
+
+    <style type="text/css">
+        body {
+          background-color: #e5a8f0;
+          text-align: center;
+        }
+
+        #box {
+            width: 500px;
+            height: 200px;
+            border: 300px;
+            padding: 5px 7px;
+            font: 30px "Times New Roman";
+        }
+
+        footer {
+            text-align: center;
+            background-color: #dd8deb;
+        }
+
+        .button {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  padding: 1px;
+  cursor: pointer;
+  border: solid 1px #fff;
+}
+ 
+.button:hover {
+  border: solid 1px #f00;
+}
+ 
+.button:active {
+  border: solid 1px #ff0;
+}
+ 
+#palette, #canvas {
+  display: inline-block;
+  border: solid 1px #aaa;
+  cursor: default;
+  vertical-align: top;
+}
+ 
+#palette {
+  width: 95px;
+}
+ 
+#clear {
+  background: #eee;
+  color: #777;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  margin: 15px auto;
+  cursor: pointer;
+}
+ 
+.container {
+   white-space: normal;
+   width: 710px;
+}
+
+.neonText {
+  color: #FFFAFA;
+  text-shadow:
+      0 0 7px #BA55D3,
+      0 0 10px #BA55D3,
+      0 0 21px #FFFAFA,
+      0 0 42px #E6E6FA,
+      0 0 82px #E6E6FA,
+      0 0 92px #E6E6FA,
+      0 0 102px #800080,
+      0 0 151px #800080;
+}   
+  
+h1 {
+    font-size: 3.2rem;
+}
+h2 {}
+summary{
+  text: 15px;
+}
+h6 {}
+p {
+    font-size: 2.2rem;
+}
+
+.container1 {
+  margin-top: 20vh;
+}
+    </style>
+
